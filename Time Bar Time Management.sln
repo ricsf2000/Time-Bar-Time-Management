@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Time Bar Time Management", "Time Bar Time Management\Time Bar Time Management.csproj", "{A0202AF2-7EA5-401D-8D92-A6ED4E9CF5A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0202AF2-7EA5-401D-8D92-A6ED4E9CF5A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0202AF2-7EA5-401D-8D92-A6ED4E9CF5A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0202AF2-7EA5-401D-8D92-A6ED4E9CF5A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0202AF2-7EA5-401D-8D92-A6ED4E9CF5A4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DF2337D0-2F7D-4122-91D4-F5F390C9080E}
+	EndGlobalSection
+EndGlobal
