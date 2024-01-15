@@ -10,6 +10,6 @@ namespace Time_Bar_Time_Management
     {
         public string Description { get; set; }
         public int PercentTime { get; set; }
-        public bool Status {  get; set; }
+        public bool Status { get; set; } = false;
     }
 }

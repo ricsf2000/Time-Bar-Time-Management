@@ -5,51 +5,54 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Time_Bar_Time_Management"
         mc:Ignorable="d"
-        Title="MainMenu" Height="450" Width="800">
+        Title="MainMenu" Height="414" Width="614"
+        MinWidth="320" MinHeight="400">
     <Grid>
-        <Grid.RowDefinitions>
-        </Grid.RowDefinitions>
-        <Label Content="Timebar" FontFamily="Bookman Old Style" FontSize="13" FontStyle="Italic" Grid.RowSpan="2"/>
-        <Label Content="Time Available:" Margin="20,62,0,0" FontSize="15" FontFamily="Bookman Old Style" Grid.RowSpan="2" />
-        <Label Content="Tasks:" Margin="20,87,0,0" FontSize="15" FontFamily="Bookman Old Style" Grid.RowSpan="2"/>
-        <TextBox x:Name="Hours" TextWrapping="Wrap" Text="Hours" Margin="145,67,0,0" Width="80" FontStyle="Italic" Foreground="Gray" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" GotFocus="Hours_GotFocus" LostFocus="Hours_LostFocus" FontSize="13"/>
-        <TextBox x:Name="Minutes" TextWrapping="Wrap" Text="Minutes" Margin="230,67,0,0" Width="80" FontStyle="Italic" Foreground="Gray" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" GotFocus="Minutes_GotFocus" LostFocus="Minutes_LostFocus" FontSize="13"/>
-        <Button Content="Submit" Margin="673,382,0,0" FontFamily="Bookman Old Style" FontWeight="Bold" BorderBrush="Black" Background="#FFD6DBE6" Click="Button_Click" Height="30" VerticalAlignment="Top" FontSize="14" HorizontalAlignment="Left" Width="105">
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="Button">
-                                <Border CornerRadius="8" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-        <ListView x:Name="tasksListView" Width="300" Height="200" FontFamily="Bookman Old Style" FontSize="13" Margin="0,0,480,0" VerticalAlignment="Center" HorizontalAlignment="Right">
+        <Grid Margin="0,120,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="397*"/>
+                <ColumnDefinition Width="217*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="TimeNeeded" TextWrapping="Wrap" Text="% Time" FontStyle="Italic" Foreground="Gray" Height="20" VerticalAlignment="Bottom" GotFocus="TimeNeeded_GotFocus" LostFocus="TimeNeeded_LostFocus" FontSize="13" Grid.Column="1" HorizontalAlignment="Left" Width="54" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,1,122"/>
+            <TextBox x:Name="Description" TextWrapping="Wrap" Text="Description" Margin="20,0,10,122" FontStyle="Italic" Foreground="Gray" Height="20" VerticalAlignment="Bottom" GotFocus="Description_GotFocus" LostFocus="Description_LostFocus" FontSize="13"/>
+            <Button Content="Submit" FontFamily="Bookman Old Style" FontWeight="Bold" BorderBrush="Black" Background="#FFD6DBE6" Click="Button_Click" Height="30" FontSize="14" HorizontalAlignment="Right" Width="86" Grid.Column="1" VerticalAlignment="Bottom" Margin="0,0,20,50">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="8" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
+        <Label Content="Timebar" FontFamily="Bookman Old Style" FontSize="13" FontStyle="Italic" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Time Available:" Margin="20,32,0,0" FontSize="15" FontFamily="Bookman Old Style" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <Label Content="Tasks:" Margin="20,57,0,0" FontSize="15" FontFamily="Bookman Old Style" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox x:Name="Hours" TextWrapping="Wrap" Text="Hours" Margin="146,36,0,0" FontStyle="Italic" Foreground="Gray" Height="20" VerticalAlignment="Top" GotFocus="Hours_GotFocus" LostFocus="Hours_LostFocus" FontSize="13" HorizontalAlignment="Left" Width="49"/>
+        <TextBox x:Name="Minutes" TextWrapping="Wrap" Text="Minutes" Margin="200,36,0,0" Width="60" FontStyle="Italic" Foreground="Gray" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" GotFocus="Minutes_GotFocus" LostFocus="Minutes_LostFocus" FontSize="13"/>
+        <ListView x:Name="tasksListView" d:ItemsSource="{d:SampleData ItemCount=1}" FontFamily="Bookman Old Style" FontSize="13" Margin="19,85,19,149" VerticalContentAlignment="Center">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Description" Width="120">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-
-                    <GridViewColumn Header="% of Time Needed" Width="150">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding TimeNeeded, UpdateSourceTrigger=PropertyChanged}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <!-- Add more columns for additional properties -->
+                    <GridViewColumn Header="    Description    " DisplayMemberBinding="{Binding Description}" />
+                    <GridViewColumn Header="    % of Time Needed    " DisplayMemberBinding="{Binding PercentTime, StringFormat={}{0}%}" />
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button Content="+" BorderBrush="Black" Background="#FFD6DBE6" RenderTransformOrigin="0.5,0.566" HorizontalAlignment="Left" Padding="1,1,1,1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="20,0,0,100" Width="52" Panel.ZIndex="0" Grid.ColumnSpan="1" FontFamily="Bookman Old Style" FontWeight="Bold" Click="Button_Click_1" Height="17" VerticalAlignment="Bottom">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
     </Grid>
 </Window>

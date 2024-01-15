@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +20,15 @@ namespace Time_Bar_Time_Management
     /// </summary>
     public partial class MainMenu : Window
     {
+        private int TotalPercent = 0;
         public MainMenu()
         {
             InitializeComponent();
+            DataContext = this;
+            tasksListView.ItemsSource = Tasks;
         }
-        private void GotFocus_Time(TextBox Time, string timeType)
+        ObservableCollection<Task> Tasks { get; set; } = new ObservableCollection<Task>();
+        private void GotFocus_General(TextBox Time, string timeType)
         {
             if (Time != null)
             {
@@ -36,7 +41,7 @@ namespace Time_Bar_Time_Management
                 }
             }
         }
-        private void LostFocus_Time(TextBox Time, string timeType)
+        private void LostFocus_General(TextBox Time, string timeType)
         {
             if (Time != null)
             {
@@ -56,28 +61,66 @@ namespace Time_Bar_Time_Management
 
         private void Hours_GotFocus(object sender, RoutedEventArgs e)
         {
-            TextBox Time = (TextBox)sender;
-            GotFocus_Time(Time, "Hours");
+            GotFocus_General(Hours, "Hours");
         }
 
         private void Hours_LostFocus(object sender, RoutedEventArgs e)
         {
-            TextBox Time = (TextBox)sender;
-            LostFocus_Time(Time, "Hours");
+            LostFocus_General(Hours, "Hours");
         }
 
         private void Minutes_GotFocus(object sender, RoutedEventArgs e)
         {
-            TextBox Time = (TextBox)sender;
-            GotFocus_Time(Time, "Minutes");
+            GotFocus_General(Minutes, "Minutes");
         }
 
         private void Minutes_LostFocus(object sender, RoutedEventArgs e)
         {
-            TextBox Time = (TextBox)sender;
-            LostFocus_Time(Time, "Minutes");
+            LostFocus_General(Minutes, "Minutes");
         }
 
-        private void tasksListView(object sender, RoutedEventArgs e)
+        //private void tasksListView(object sender, RoutedEventArgs e)
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (int.TryParse(TimeNeeded.Text, out int pTime))
+            {
+                if (TotalPercent + pTime <= 100)
+                {
+                    Tasks.Add(new Task { Description = Description.Text, PercentTime = pTime });
+                    TotalPercent += pTime;
+                    TimeNeeded.Text = "";
+                    Description.Text = "";
+                    LostFocus_General(TimeNeeded, "% Time");
+                    LostFocus_General(Description, "Description");
+                }
+                else
+                { MessageBox.Show("Percent is over 100."); }
+            }
+            else
+            {
+                MessageBox.Show("Invalid input. Please enter an integer.");
+            }            
+        }
+
+        private void TimeNeeded_GotFocus(object sender, RoutedEventArgs e)
+        {
+            GotFocus_General(TimeNeeded, "% Time");
+        }
+
+        private void TimeNeeded_LostFocus(object sender, RoutedEventArgs e)
+        {
+            LostFocus_General(TimeNeeded, "% Time");
+        }
+
+        private void Description_GotFocus(object sender, RoutedEventArgs e)
+        {
+            GotFocus_General(Description, "Description");
+        }
+
+        private void Description_LostFocus(object sender, RoutedEventArgs e)
+        {
+            LostFocus_General(Description, "Description");
+        }
     }
 }
