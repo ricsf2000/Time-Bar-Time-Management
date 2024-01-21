@@ -21,6 +21,9 @@ namespace Time_Bar_Time_Management
     public partial class MainMenu : Window
     {
         private int TotalPercent = 0;
+        private double hours;
+        private double minutes;
+
         public MainMenu()
         {
             InitializeComponent();
@@ -56,7 +59,30 @@ namespace Time_Bar_Time_Management
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            double currentLeft = Left;
+            double currentTop = Top;
+            double currentWidth = Width;
+            double currentHeight = Height;
 
+            if (int.TryParse(Hours.Text, out int HoursOut) && int.TryParse(Minutes.Text, out int MinutesOut))
+            {
+                hours = HoursOut;
+                minutes = MinutesOut;
+            }
+            else
+            {
+                MessageBox.Show("Invalid input.");
+            }
+
+            Progress progressWindow = new Progress(hours, minutes);
+
+            progressWindow.Left = currentLeft;
+            progressWindow.Top = currentTop;
+            progressWindow.Width = currentWidth;
+            progressWindow.Height = currentHeight;
+            progressWindow.Show();
+
+            Close();
         }
 
         private void Hours_GotFocus(object sender, RoutedEventArgs e)

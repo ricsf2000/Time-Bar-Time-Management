@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Time_Bar_Time_Management"
         mc:Ignorable="d"
-        Title="Progress" Height="450" Width="800">
+        Title="Progress" Height="350" Width="270"
+        MinHeight="350" MinWidth="270">
     <Grid>
+        <ProgressBar x:Name="TimeLeft" Height="25" Margin="66,73,66,0" VerticalAlignment="Top" Maximum="100" Foreground="#FF8BA0CE" Value="20."/>
+        <ProgressBar x:Name="OverallProgress" Height="25" Margin="66,149,66,0" VerticalAlignment="Top" Foreground="#FF5374B9" />
+        <Label Content="Timebar" FontFamily="Bookman Old Style" FontSize="13" FontStyle="Italic" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Time Left" Margin="0,45,0,0" FontSize="15" FontFamily="Bookman Old Style" VerticalAlignment="Top" HorizontalAlignment="Center" />
+        <Label Content="Progress Remaining" Margin="0,121,0,0" FontSize="15" FontFamily="Bookman Old Style" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <Label Content="Task Completion:" Margin="20,217,0,0" FontSize="15" FontFamily="Bookman Old Style" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
+        <ListBox x:Name="taskListBox" d:ItemsSource="{d:SampleData ItemCount=5}" FontSize="15" FontFamily="Bookman Old Style" Margin="0,245,0,0" Padding="20,5,20,1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding TaskName}" Margin="0,0,10,0"/>
+                        <Slider Value="{Binding Completion}" Width="100" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

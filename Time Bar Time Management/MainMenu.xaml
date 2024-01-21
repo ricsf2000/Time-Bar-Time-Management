@@ -15,15 +15,20 @@
             </Grid.ColumnDefinitions>
             <TextBox x:Name="TimeNeeded" TextWrapping="Wrap" Text="% Time" FontStyle="Italic" Foreground="Gray" Height="20" VerticalAlignment="Bottom" GotFocus="TimeNeeded_GotFocus" LostFocus="TimeNeeded_LostFocus" FontSize="13" Grid.Column="1" HorizontalAlignment="Left" Width="54" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,1,122"/>
             <TextBox x:Name="Description" TextWrapping="Wrap" Text="Description" Margin="20,0,10,122" FontStyle="Italic" Foreground="Gray" Height="20" VerticalAlignment="Bottom" GotFocus="Description_GotFocus" LostFocus="Description_LostFocus" FontSize="13"/>
-            <Button Content="Submit" FontFamily="Bookman Old Style" FontWeight="Bold" BorderBrush="Black" Background="#FFD6DBE6" Click="Button_Click" Height="30" FontSize="14" HorizontalAlignment="Right" Width="86" Grid.Column="1" VerticalAlignment="Bottom" Margin="0,0,20,50">
+            <Button Content="Submit" FontFamily="Bookman Old Style" FontWeight="Bold" BorderBrush="Black" Background="#FFD6DBE6" Click="Button_Click" Height="30" FontSize="14" HorizontalAlignment="Right" Width="86" Grid.Column="1" VerticalAlignment="Bottom" Margin="0,0,20,50" Foreground="Black">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
-                                    <Border CornerRadius="8" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                    <Border Name="border" CornerRadius="8" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="#FFC8D0E2"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
@@ -44,7 +49,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="+" BorderBrush="Black" Background="#FFD6DBE6" RenderTransformOrigin="0.5,0.566" HorizontalAlignment="Left" Padding="1,1,1,1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="20,0,0,100" Width="52" Panel.ZIndex="0" Grid.ColumnSpan="1" FontFamily="Bookman Old Style" FontWeight="Bold" Click="Button_Click_1" Height="17" VerticalAlignment="Bottom">
+        <Button Content="+" BorderBrush="Black" Background="#FFD6DBE6" RenderTransformOrigin="0.5,0.566" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="20,0,0,100" Width="52" Grid.ColumnSpan="1" FontFamily="Bookman Old Style" FontWeight="Bold" Click="Button_Click_1" Height="17" VerticalAlignment="Bottom">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="1"/>
