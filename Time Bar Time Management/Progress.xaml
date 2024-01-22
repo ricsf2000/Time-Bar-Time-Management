@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Time_Bar_Time_Management"
         mc:Ignorable="d"
-        Title="Progress" Height="350" Width="270"
+        Title="Progress" Height="350" Width="400"
         MinHeight="350" MinWidth="270">
     <Grid>
-        <ProgressBar x:Name="TimeLeft" Height="25" Margin="66,73,66,0" VerticalAlignment="Top" Maximum="100" Foreground="#FF8BA0CE" Value="20."/>
+        <ProgressBar x:Name="TimeLeft" Height="25" Margin="66,73,66,0" VerticalAlignment="Top" Maximum="100" Foreground="#FF8BA0CE" />
         <ProgressBar x:Name="OverallProgress" Height="25" Margin="66,149,66,0" VerticalAlignment="Top" Foreground="#FF5374B9" />
         <Label Content="Timebar" FontFamily="Bookman Old Style" FontSize="13" FontStyle="Italic" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label Content="Time Left" Margin="0,45,0,0" FontSize="15" FontFamily="Bookman Old Style" VerticalAlignment="Top" HorizontalAlignment="Center" />
@@ -19,8 +19,9 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding TaskName}" Margin="0,0,10,0"/>
-                        <Slider Value="{Binding Completion}" Width="100" />
+                        <TextBlock Text="{Binding Description}" Margin="0,0,10,0"/>
+                        <Slider x:Name="ProgressSlider"  Value="{Binding completion}" Maximum="100"  ValueChanged="ProgressSlider_ValueChanged" Width="159" />
+                        <Label x:Name="SliderLabel" Content="{Binding FormattedCompletion}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

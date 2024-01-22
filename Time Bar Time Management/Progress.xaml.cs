@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,8 @@ namespace Time_Bar_Time_Management
         public Progress(double hours, double minutes)
         {
             InitializeComponent();
+            ObservableCollection<Task> Tasks = TaskManager.Instance.Tasks;
+            taskListBox.ItemsSource = TaskManager.Instance.Tasks;
             startingTime = DateTime.Now;
             totalTime = (hours*60) + minutes;
             timer = new DispatcherTimer();
@@ -37,7 +40,17 @@ namespace Time_Bar_Time_Management
         {
             UpdateOverallProgress();
         }
-
+        private void ProgressSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            double currentProgress = 0;
+            foreach (Task task in TaskManager.Instance.Tasks)
+            {
+                int intPercentTime = task.PercentTime;
+                double doublePercentTime = (double)intPercentTime;
+                currentProgress += (doublePercentTime*(task.completion))/100;
+            }
+            OverallProgress.Value = currentProgress;
+        }
         private void UpdateOverallProgress()
         {
             // Calculate progress based on real-world time or any other criteria

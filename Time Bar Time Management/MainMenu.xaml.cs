@@ -23,14 +23,13 @@ namespace Time_Bar_Time_Management
         private int TotalPercent = 0;
         private double hours;
         private double minutes;
+        private bool tmInitialized = false;
 
         public MainMenu()
         {
             InitializeComponent();
             DataContext = this;
-            tasksListView.ItemsSource = Tasks;
         }
-        ObservableCollection<Task> Tasks { get; set; } = new ObservableCollection<Task>();
         private void GotFocus_General(TextBox Time, string timeType)
         {
             if (Time != null)
@@ -109,11 +108,17 @@ namespace Time_Bar_Time_Management
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            if (tmInitialized == false) 
+            {
+                tasksListView.ItemsSource = TaskManager.Instance.Tasks;
+                tmInitialized = true;
+            }
             if (int.TryParse(TimeNeeded.Text, out int pTime))
             {
+
                 if (TotalPercent + pTime <= 100)
                 {
-                    Tasks.Add(new Task { Description = Description.Text, PercentTime = pTime });
+                    TaskManager.Instance.Tasks.Add(new Task { Description = Description.Text, PercentTime = pTime });
                     TotalPercent += pTime;
                     TimeNeeded.Text = "";
                     Description.Text = "";
