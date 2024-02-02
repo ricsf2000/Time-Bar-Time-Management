@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -60,5 +62,24 @@ namespace Time_Bar_Time_Management
             double progress = (elapsedTime.TotalMinutes) / (totalTime) * 100.0;
             TimeLeft.Value = progress;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            double currentLeft = Left;
+            double currentTop = Top;
+            double currentWidth = Width;
+            double currentHeight = Height;
+
+            MainMenu MenuWindow = new MainMenu();
+
+            MenuWindow.Left = currentLeft;
+            MenuWindow.Top = currentTop;
+            MenuWindow.Width = currentWidth;
+            MenuWindow.Height = currentHeight;
+            MenuWindow.Show();
+
+            Close();
+        }      
+
     }
 }
