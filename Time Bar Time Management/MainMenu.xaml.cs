@@ -153,5 +153,15 @@ namespace Time_Bar_Time_Management
         {
             LostFocus_General(Description, "Description");
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (tasksListView.SelectedItem != null)
+            {
+                Task selectedTask = (Task)tasksListView.SelectedItem;
+                TotalPercent -= selectedTask.PercentTime;
+                TaskManager.Instance.Tasks.Remove(selectedTask);
+            }
+        }
     }
 }
